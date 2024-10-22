@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayak Samanta</title>
+
+  <!-- Link to the external CSS file -->
+  <style>
+    /* Root Variables */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    :root {
+      --bg-color-light: #c1f7f5;
+      --bg-color-dark: #2c2c2c;
+      --header-color: #d3d3d3; /* Light grey for header */
+      --text-color-light: #333;
+      --text-color-dark: #fff;
+      --accent-color: #34efdf;
+      --card-bg-light: #ffffff; /* Light mode card background */
+      --card-bg-dark: #444444;  /* Dark mode card background */
+      --section-bg-light: #f5f5f5; /* Light mode section background */
+      --section-bg-dark: #555555; /* Dark mode section background */
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: white;
+      padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      animation: fadeIn 1s; /* Apply fade-in effect */
+    }
+
+    /* Keyframe Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Dark Mode Styles */
+    body.dark {
+      background: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .dark .header {
+      background: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .dark .toggle-button {
+      background-color: var(--text-color-dark);
+      color: var(--bg-color-dark);
+    }
+
+    /* Toggle Button Styles */
+    .toggle-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background-color: var(--text-color-light);
+      color: var(--bg-color-light);
+      border: none;
+      border-radius: 50px;
+      padding: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px;
+      background-color: var(--header-color); /* Light grey */
+      border-radius: 0;
+      margin-left: -20px;
+      margin-top: -20px;
+      margin-right: -20px;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    /* Profile Image */
+    .header img {
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      object-fit: cover;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    /* Profile Name */
+    .header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-color-light);
+    }
+
+    .dark .header h3 {
+      color: var(--text-color-dark);
+    }
+
+    /* Profile Section Container */
+    .section-container {
+      padding: 20px;
+      background-color: #ffff; /* Light mode background */
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    /* Styling for Profile Section */
+    .section-container {
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-container img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-container h3 {
+      font-size: 25px;
+      font-weight: 600;
+      color: var(--text-color-light);
+      margin-bottom: 10px;
+    }
+      .section-container h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-color-light);
+      margin-bottom: 10px;
+        margin-left: -50px;
+    }
+
+    .section-container p, {
+      font-size: 3px;
+      color: var(--text-color-light);
+      line-height: 1.6;
+      margin: 0px;
+      margin-left: -50px;
+    }
+
+    .dark .section-container {
+      background-color: #333;
+    }
+
+    .dark .section-container h3 , .dark .section-container p,  .dark .section-container h4 {
+     
+      color: var(--text-color-dark);
+    }
+
+    /* Image Card Section */
+    .image-card1 {
+      background-color: var(--card-bg-light); /* Light mode card background */
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .image-card1 img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .dark .image-card1 {
+      background-color: var(--card-bg-dark); /* Dark mode card background */
+    }
+  </style>
+</head>
+
+<body>
+  
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="toggle-button" onclick="toggleTheme()">Dark</button>
+
+  <!-- Header Section -->
+  <header class="header">
+    <img src="/storage/emulated/0/Pictures/Screenshots/IMG_20241015_150330.jpg" alt="Sayak Samanta">
+    <h3>SAYAK SAMANTA</h3>
+  </header>
+    <div class="image-card1">
+   
+ <img src="/storage/emulated/0/Pictures/100PINT/Pins/d22f204292d5e904f710bdae11d9060c.jpg"></div>
+  <!-- Profile Section -->
+  <div class="section-container">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/IMG_20241021_162601.jpg" alt="Profile Icon">
+    <div>
+      <h3> Review Article</h3>
+      <p>
+        <h4> A Review of Quantum Computing: Principles, Developments, and Future Prospects</h4>
+            </p>
+        
+    </div>
+        </div>
+  
+  <div class="section-container">
+    
+      
+      <p>
+        Sayak samanta¹, Arghyadeep Majhi², soumodeep Chakrabarti³<br>
+        
+        <br> <b> Author of correspondence</b>: sayaksmnt@gmail.com<br><br>
+        University of Engineering and Management, kolkata, West bengal, pin: 743502
+                            </p>
+          
+  
+      </div>
+    </div>
+  
+  <div class="section-container">
+    
+      
+      <p>
+          <br> <b> Abstract</b><br><br>
+        
+        
+Quantum computing represents a paradigm shift in computational technology, leveraging the principles of quantum mechanics to perform calculations at unprecedented speeds. This review article provides an overview of the fundamental principles of quantum computing, the current state of development, applications, challenges, and future prospects.
+        
+                        </p>
+          
+  
+      </div>
+  
+    
+</div>
+  
+  <div class="section-container">
+    
+      
+      <p>
+                   <b> 1. Introduction</b><br><br>
+Quantum computing has emerged as one of the most promising fields in computer science and physics, offering solutions to problems that are intractable for classical computers. By utilizing quantum bits, or qubits, quantum computers exploit superposition and entanglement, enabling them to process vast amounts of data simultaneously.
+           </p>
+          </p>
+  
+      </div>
+  
+  
+    <div class="section-container">
+    
+      
+      <p>
+           <b>2. Fundamental Principles.</b><br><br>
+Quantum computing is based on several key principles of quantum mechanics:
+
+Qubits: Unlike classical bits, which represent either a 0 or 1, qubits can exist in a superposition of states, allowing them to perform multiple calculations at once.
+Superposition: This principle enables qubits to be in a combination of 0 and 1 states simultaneously, which increases computational power exponentially as more qubits are added.
+Entanglement: Qubits can become entangled, meaning the state of one qubit is dependent on the state of another, regardless of the distance separating them. This property is essential for quantum communication and quantum algorithms.
+        
+          </p>
+  
+      </div>
+  
+
+
+      <div class="section-container">
+    
+      
+      <p>
+           Quantum Gates: Quantum computations are performed using quantum gates, which manipulate the states of qubits through unitary operations. These gates form quantum circuits, analogous to classical logic gates.
+<br><br><b>3. Current State of Development</b><br><br>
+The field of quantum computing is rapidly evolving, with significant advancements in both hardware and software:
+
+Quantum Hardware: Various physical implementations of qubits exist, including superconducting circuits, trapped ions, topological qubits, and photonic systems. Companies like IBM, Google, and Rigetti Computing are actively developing quantum processors with increasing qubit counts and coherence times.
+        Quantum Software: Quantum algorithms, such as Shor's algorithm for factoring large integers and Grover's algorithm for search problems, showcase the potential of quantum computing. Quantum programming languages like Qiskit and Cirq are being developed to facilitate quantum algorithm implementation.
+          </p>
+  
+      </div>
+  
+
+      </div>
+  
+
+
+      <div class="section-container">
+    
+      
+      <p>
+        
+       <b>4. Applications
+Quantum computing holds potential across various fields:</b><br><br>
+        
+        
+        
+        Quantum computing holds potential across various fields:
+
+Cryptography: Quantum computers can potentially break current cryptographic schemes, leading to the development of quantum-resistant algorithms and quantum key distribution (QKD).
+Optimization: Many real-world problems, such as logistics and finance, can benefit from quantum optimization algorithms that provide faster and more efficient solutions.
+Drug Discovery: Quantum simulations can model molecular interactions, significantly accelerating the drug discovery process and reducing costs.
+        
+        
+        </p>
+  
+      </div>
+  
+
+      <div class="section-container">
+    
+      
+      <p>
+        
+       <b>5. Challenges
+Despite its potential, quantum computing faces several challenges:</b><br><br>
+Decoherence: Qubits are highly susceptible to environmental noise, leading to loss of information and errors in calculations.
+Error Correction: Developing efficient quantum error correction methods is critical to achieving reliable quantum computations.
+Scalability: Building scalable quantum systems with a large number of qubits while maintaining coherence and connectivity is a significant engineering challenge.
+Resource Requirements: Quantum computers require specific operating conditions, such as extremely low temperatures, which complicates their deployment.
+        </p>
+  
+      </div>
+  
+
+      <div class="section-container">
+    
+      
+      <p>
+        
+       <b>6. Conclusion</b><br><br>
+        The future of quantum computing is promising, with ongoing research focused on overcoming current challenges. As technology matures, quantum computers are expected to tackle complex problems that are currently beyond the reach of classical computers. Collaborative efforts among academia, industry, and government will play a crucial role in advancing this field.<br><br>
+         Quantum computing is on the brink of revolutionizing how we approach computation, with its unique properties offering solutions to some of the most challenging problems in various domains. While significant hurdles remain, the continued investment in research and development promises exciting advancements that could reshape our technological landscape.
+         
+   </p>
+  
+      </div>
+
+
+
+
+      <div class="section-container">
+    
+      
+      <p>
+        
+       <b>References</b><br><br>
+        [1] Nielsen, M. A., & Chuang, I. L. (2010). Quantum Computation and Quantum Information. Cambridge University Press.
+[2] Preskill, J. (2018). Quantum Computing in the NISQ era and beyond. Quantum, 2, 79.
+[3] Arute, F., et al. (2019). Quantum supremacy using a programmable superconducting processor. Nature, 574(7779), 505-510.
+[4] Farhi, E., & Harrow, A. (2016). Quantum Supremacy through the Quantum Approximate Optimization Algorithm. arXiv preprint arXiv:1602.07674.
+[5] Google AI Quantum and collaborators. (2020). Hartree-Fock on a superconducting qubit quantum computer. Nature, 574(7779), 504-508
+   </p>
+  
+      </div>
+  
+
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+
+  <!-- Link to External JavaScript Files -->
+  <script src="sayak.js" defer></script>
+  <script src="sayak_2.js" defer></script>
+  <script src="sayak_3.js" defer></script>
+  <script src="web.sayak_4.js" defer></script>
+  
+</body>
+</html>

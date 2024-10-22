@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayak Samanta</title>
+
+  <!-- Link to the external CSS file -->
+  <style>
+    /* Root Variables */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    :root {
+      --bg-color-light: #c1f7f5;
+      --bg-color-dark: #2c2c2c;
+      --header-color: #d3d3d3; /* Light grey for header */
+      --text-color-light: #333;
+      --text-color-dark: #fff;
+      --accent-color: #34efdf;
+      --card-bg-light: #ffffff; /* Light mode card background */
+      --card-bg-dark: #444444;  /* Dark mode card background */
+      --section-bg-light: #f5f5f5; /* Light mode section background */
+      --section-bg-dark: #555555; /* Dark mode section background */
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: white;
+      padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      animation: fadeIn 1s; /* Apply fade-in effect */
+    }
+
+    /* Keyframe Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Dark Mode Styles */
+    body.dark {
+      background: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .dark .header {
+      background: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .dark .toggle-button {
+      background-color: var(--text-color-dark);
+      color: var(--bg-color-dark);
+    }
+
+    /* Toggle Button Styles */
+    .toggle-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background-color: var(--text-color-light);
+      color: var(--bg-color-light);
+      border: none;
+      border-radius: 50px;
+      padding: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px;
+      background-color: var(--header-color); /* Light grey */
+      border-radius: 0;
+      margin-left: -20px;
+      margin-top: -20px;
+      margin-right: -20px;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    /* Profile Image */
+    .header img {
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      object-fit: cover;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    /* Profile Name */
+    .header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-color-light);
+    }
+
+    .dark .header h3 {
+      color: var(--text-color-dark);
+    }
+
+    /* Profile Section Container */
+    .section-container {
+      padding: 20px;
+      background-color: #ffff; /* Light mode background */
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    /* Styling for Profile Section */
+    .section-container {
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-container img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-container h3 {
+      font-size: 25px;
+      font-weight: 600;
+      color: var(--text-color-light);
+      margin-bottom: 10px;
+    }
+
+    .section-container p {
+      font-size: 13px;
+      color: var(--text-color-light);
+      line-height: 1.6;
+      margin: 0px;
+      margin-top:50px;
+      margin-left: -80px;
+    }
+
+  .section-container2 {
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+      .section-container2 p, ul{
+      font-size: 17px;
+      color: var(--text-color-light);
+      line-height: 1.6;
+      margin: 0px;
+      margin-top:50px;
+      margin-left: 50px;
+    }
+
+    .dark .section-container {
+      background-color: #333;
+    }
+
+    .dark .section-container h3, .dark .section-container p {
+      color: var(--text-color-dark);
+    }
+
+    /* Image Card Section */
+    .image-card {
+      background-color: var(--card-bg-light); /* Light mode card background */
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .image-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .dark .image-card {
+      background-color: var(--card-bg-dark); /* Dark mode card background */
+    }
+
+    /* Media Queries for larger screens */
+    @media (min-width: 768px) {
+      .header {
+        padding: 15px 40px;
+      }
+
+      .header h3 {
+        font-size: 22px;
+      }
+
+      .section-container {
+        padding: 30px;
+        margin-bottom: 30px;
+      }
+
+      .section-container h3 {
+        font-size: 28px;
+      }
+
+      .section-container p {
+        font-size: 15px;
+      }
+
+      .image-card {
+        padding: 30px;
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding: 40px;
+      }
+
+      .header {
+        padding: 20px 60px;
+      }
+
+      .header h3 {
+        font-size: 26px;
+      }
+
+      .section-container {
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+
+      .section-container h3 {
+        font-size: 32px;
+      }
+
+      .section-container p {
+        font-size: 17px;
+      }
+
+      .image-card {
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="toggle-button" onclick="toggleTheme()">Dark</button>
+
+  <!-- Header Section -->
+  <header class="header">
+    <img src="/storage/emulated/0/Pictures/Screenshots/IMG_20241015_150330.jpg" alt="Sayak Samanta">
+    <h3>SAYAK SAMANTA</h3>
+  </header>
+
+  <div class="image-card">
+   
+ <img src="/storage/emulated/0/Pictures/100PINT/Pins/5a2a1562ebcee58f5ab6267bdea7d92a (1).jpg"></div>
+ 
+  
+  <!-- Profile Section -->
+  <div class="section-container">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/adf44d2370343b6f295aee14522055cf.jpg" alt="Profile Icon">
+    
+    <h3>Skills</h3>
+    <div>
+      
+    <p>
+      I am a BTech student and machine learning enthusiast with strong proficiency in a range of technologies. My skills include programming languages like Python, HTML, CSS, and JavaScript, which I use to develop dynamic web applications. I have hands-on experience with machine learning frameworks such as TensorFlow, Scikit-Learn, and PyTorch for building advanced models in computer vision and natural language processing. Additionally, I am skilled in data manipulation with NumPy and Pandas, database management using SQL and NoSQL systems, and cloud computing platforms like AWS and Azure. My familiarity with Docker and Kubernetes enhances my ability to create scalable applications, driving innovation in machine learning and data science. 
+
+      </p>
+    </div>
+  </div>
+  
+    <div class="section-container2">
+
+    <div>
+      
+    <p><ul>
+      <li> Python</li>
+       <li> HTML & CSS</li>
+      <li>Kubernetes</li>
+       <li>java script</li>
+            <li>Docker</li>
+       <li>AWS</li>
+             <li> Git & Github</li>
+      <li> pytorch  </li>
+    </ul>
+       </p>
+    </div>
+     </div>
+
+  <!-- Image Card Section -->
+  <div class="image-card">
+    <p>
+      Python
+    </p>
+<a href="https://www.python.org/"> <img src="/storage/emulated/0/Pictures/100PINT/Pins/d80675c64b6470b6dbb75a0a8a41e422.jpg"></a></div>
+
+  <div class="image-card">
+    <p>
+      HTML & CSS
+    </p>
+<a href="https://www.nobledesktop.com/learn/html-css/what-is-html-css"><img src="/storage/emulated/0/Pictures/100PINT/Pins/e87e26c1f79051d2a615218fbeaec6a2.jpg"></a></div>
+<div class="image-card">
+    <p>
+      
+     Kubernetes
+    </p>
+<a href="https://kubernetes.io/"><img src="/storage/emulated/0/Pictures/100PINT/Pins/026886d29bc57dd6a97f52b877ff518e.jpg"></a></div>
+
+  <div class="image-card">
+    <p>
+      java script
+    </p>
+<a href="https://www.learn-js.org/"><img src="/storage/emulated/0/Pictures/100PINT/Pins/04f4b1f9cfbecfaafbb58dbd2f5f6e91.jpg"> </a></div>
+  <div class="image-card">
+    <p>
+      
+     Docker
+    </p>
+<a href="https://www.docker.com/"><img src="/storage/emulated/0/Pictures/100PINT/Pins/c557aa7ab2a8b319baff19114f9cf73b.jpg"> </a> </div>
+
+  <div class="image-card">
+    <p>
+      AWS
+    </p>
+<a href="https://aws.amazon.com/free/?trk=48a4abd1-f35b-4aae-9357-c9e9704fa08b&sc_channel=ps&ef_id=EAIaIQobChMIqOCuzZqfiQMVMiiDAx1yxg2XEAAYASAAEgLNPvD_BwE:G:s&s_kwcid=AL!4422!3!652472232615!e!!g!!aws!17258078530!145232466668&gclid=EAIaIQobChMIqOCuzZqfiQMVMiiDAx1yxg2XEAAYASAAEgLNPvD_BwE"><img src="/storage/emulated/0/Pictures/100PINT/Pins/39111ca9c31df06d299332517efe5710.jpg"></a> </div>
+  <div class="image-card">
+    <p>
+      
+     Git & Github
+    </p>
+<a href="https://docs.github.com/en/get-started/using-git/about-git"><img src="/storage/emulated/0/Pictures/100PINT/Pins/aef7ace39bcd0373419177ba08b41428.jpg"></a></div>
+
+  <div class="image-card">
+    <p>
+      Pytorch
+    </p>
+<a href="https://pytorch.org/"><img src="/storage/emulated/0/Pictures/100PINT/Pins/475eea923052eac434f18ff915f2301c.jpg"> </a></div>
+  
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+</body>
+</html>

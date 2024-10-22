@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayak Samanta</title>
+  
+  <!-- Link to the external CSS file -->
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+  --bg-color-light: #c1f7f5;
+  --bg-color-dark: #2c2c2c;
+  --text-color-light: #333;
+  --text-color-dark: #fff;
+  --nav-bg-light: #fff;
+  --nav-bg-dark: #444;
+  --accent-color: #34efdf;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--bg-color-light);
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Styles */
+body.dark {
+  background: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+.dark .nav-links,
+.dark section,
+.dark .contact-form {
+  background: var(--nav-bg-dark);
+  color: var(--text-color-dark);
+}
+
+.dark .nav-links li a,
+.dark .profile-name {
+  color: var(--text-color-dark);
+}
+
+/* Toggle Button Styles */
+.toggle-button {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  background-color: var(--text-color-light);
+  color: var(--bg-color-light);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .toggle-button {
+  background-color: var(--text-color-dark);
+  color: var(--bg-color-dark);
+}
+  
+  
+/* Navigation Styles */
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nav-bg-light);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navigation items */
+.nav-links li {
+  list-style: none;
+  margin: 0 10px;
+}
+
+.nav-links li a {
+  position: relative;
+  color: var(--text-color-light);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 6px 0;
+  text-decoration: none;
+}
+
+.nav-links li a:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--accent-color);
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+
+.nav-links li a:hover:before {
+  width: 100%;
+}
+
+/* Responsive Navigation Bar for Smaller Screens */
+@media (max-width: 768px) {
+  /* Stack the nav links vertically on mobile */
+  .nav-links {
+    flex-direction: column;
+    padding: 0px;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+  }
+
+  .nav-links li a {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+}
+
+/* Navigation on very small screens (like mobile) */
+@media (max-width: 480px) {
+  .nav-links {
+    padding: 5px;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 4px 0;
+  }
+
+  .nav-links li a {
+    font-size: 14px;
+    padding: 5px 0;
+  }
+}
+
+/* Sidebar Styles */
+  .sidebar {
+  display: block;
+  position: fixed;
+  left: -250px; /* Start hidden off-screen */
+  top: 0;
+  width: 180px;
+  height: 100%;
+  background: var(--nav-bg-light);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  padding: 15px;
+  transition: left 0.4s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Adjusted transition duration for smoother effect */
+}
+
+.sidebar.active {
+  left: 0; /* Slide into view */
+  background-color: rgba(30, 30, 30, 0.95); /* Darker background on activation */
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.7); /* Adjust shadow for dark mode */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  opacity: 0; /* Start hidden */
+  transform: translateY(-20px); /* Start slightly higher */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transition for opacity and position */
+}
+
+.sidebar.active ul {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide down into position */
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: var(--text-color-light);
+  font-weight: 500;
+  transition: color 0.3s ease; /* Smooth color transition for links */
+}
+
+.sidebar.active ul li a:hover {
+  color: var(--accent-color); /* Change link color on hover when active */
+}
+
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 1000;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color-light);
+  margin: 4px;
+  transition: all 0.3s ease;
+}
+
+body.dark .hamburger div {
+  background-color: var(--bg-color-dark);
+}
+
+.hamburger.active div {
+  background-color: var(--text-color-light);
+}
+
+/* Display the hamburger for smaller screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Contact Form */
+.contact-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+ 
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--nav-bg-light);
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  color : black;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-form input[type="submit"] {
+  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  position: absolute;
+  bottom: -50px;
+  right: 5px;
+  width: 150px;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+}
+
+.contact-form input[type="submit"]:hover {
+  background-color: #28cac5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Styles */
+section {
+  max-width: 1200px;
+  margin: 10px auto;
+  padding: 10px;
+  background: var(--nav-bg-light);
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll specific styles */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Light Mode Section Backgrounds */
+section:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+section:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+
+/* Dark Mode Section Backgrounds */
+body.dark section:nth-child(even) {
+  background-color: #444; /* Dark grey for dark mode */
+}
+
+body.dark section:nth-child(odd) {
+  background-color: #444; /* Slightly darker grey for odd sections in dark mode */
+}
+
+/* Dark Mode Text Color */
+body.dark section {
+  color: #fff; /* White text in dark mode */
+}
+
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  border: 4px solid black; /* Default border color */
+}
+
+.dark .profile-photo {
+  border: 4px solid white; /* Border color for dark mode */
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 28px;
+  margin:-10px 0px 0px -10px;
+  font-weight: 700;
+  color: var(--text-color-light
+);
+}
+
+
+/* Footer */
+
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .sidebar {
+    display: block;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .contact-form input[type="submit"] {
+    width: 100px;
+    font-size: 12px;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  section {
+    margin: 20px 5px 5px 5px;
+    padding: 15px;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .contact-form input[type="submit"] {
+    width: 90px;
+    font-size: 10px;
+  }
+}
+footer {
+            text-align: center;
+            background-color: #777;
+            padding:8px;
+            bottom: 0;
+            width:355px;
+            height:60px;
+            color: #fff;
+            font-size: 14px;
+            
+        }
+
+        footer p {
+            margin: 1px;
+        }
+  </style>
+  <link rel="stylesheet" href="web.sayak_2.css">
+  <link rel="stylesheet" href="web.sayak_3.css">
+  <link rel="stylesheet" href="web.sayak_4.css">
+  <link rel="stylesheet" href="web.sayak_5.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+ 
+  <!-- Hamburger Menu for Mobile Navigation -->
+  <div class="hamburger menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="toggle-button" onclick="toggleTheme()">Dark </button>
+
+  <!-- Profile Section with Photo and Name -->
+  <div class="profile-section">
+     
+    <div class="profile-photo">
+     <img src="https://example.com/person-icon.png" alt="Person Icon" />
+    </div>
+      
+    </div>
+   <center>
+    <div class="profile-name">
+      <h2 class="text">Sayak Samanta</h2>
+    </div>
+    </center>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation -->
+<!-- Sidebar Navigation -->
+<div id="slide-bars" class="sidebar">
+  <!-- Sidebar content -->
+  <ul class="slidebar">
+    <li><a href="#profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+    <li><a href="#projects"><i class="fas fa-file-alt"></i> Projects</a></li>
+    <li><a href="#skills"><i class="fas fa-cogs"></i> Skills</a></li>
+    <li><a href="#academics"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+    <li><a><i class="fas fa-phone-alt"></i> My Contact :</a></li>
+    <li><a> +91 8348876903</a></li>
+  </ul>
+</div>
+
+<!-- Link Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Bootstrap CSS for Glyphicon icons -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional: Add custom CSS for spacing -->
+
+
+
+<!-- Link Font Awesome for icons -->
+
+  
+  <!-- Top Navigation Bar -->
+  <div class="navbar" id="navbar">
+    <ul class="nav-links">
+      <li><a href="#profile">profile</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#academics">Academics</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Profile Section -->
+  <section id="profile">
+    <!-- Profile Section -->
+
+    
+
+
+    <h3><i class="glyphicon glyphicon-user"></i> Profile</h3>
+    <h5>Welcome to my portfolio!!</h5>
+    <p>This section contains your personal information and bio. You can talk about your background, interests, and career goals here.</p>
+
+    <!-- Add LinkedIn and X profile links -->
+    <div class="social-links">
+      <ul> 
+        
+          <li><a href="https://www.linkedin.com/in/sayak-samanta-64391a316" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin"></i> LinkedIn</a></li>
+           <li><a href="https://x.com/in/your-x-profile" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i></a></li>
+           <li><a href="https://github.com/your-profile" target="_blank" class="github-icon">
+            <i class="fab fa-github"></i></a>
+
+        </ul>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h3><i class="fas fa-file-alt"></i> Projects</h3>
+    <p>In this section, you can showcase the projects you have worked on, highlighting your skills and experiences in various domains.</p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h3><i class="fas fa-cogs"></i> Skills</h3>
+    <p>Here you can mention your technical skills, languages, tools, and frameworks that you are proficient in.</p>
+  </section>
+
+  <!-- Academics Section -->
+  <section id="academics">
+    <h3><i class="fas fa-graduation-cap"></i> Academics</h3>
+    <p>This section includes details about your academic qualifications, certifications, and courses you have completed.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h3><i class="fas fa-envelope"></i> Contact</h3>
+    <form class="contact-form" action="#" method="post">
+      <input type="text" name="name" id="name" placeholder="Your Name" required>
+      <input type="tel" name="phone" id="phone" placeholder="Your Contact Number" required>
+      <input type="email" name="email" id="email" placeholder="Your Email Address" required>
+      <textarea name="remarks" id="remarks" rows="5" placeholder="Your Remarks"></textarea>
+    <input type="submit" value="Submit">
+    </form>
+    <div>.</div> 
+    <div>.</div> 
+     <div></div> 
+    <div>.</div>
+  </section>
+
+  <!-- Link to External JavaScript Files -->
+  <script src="sayak .js" defer></script>
+  <script src="sayak_2.js" defer></script>
+  <script src="sayak_3.js" defer></script>
+  <script src="web.sayak_4.js" defer></script>
+    
+    
+    
+ <footer>
+  <p>© 2024 Sayak Samanta. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
